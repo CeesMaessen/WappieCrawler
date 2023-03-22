@@ -62,3 +62,16 @@ if __name__ == '__main__':
 
 
 # TODO: Save scraped html files. Find best way to save html files for using NLP algorithms.
+# Example websites for in queue:
+#     niburu.co
+#     ninefornews.nl
+#     hoezithetnuecht.nl
+#     gedachtenvoer.nl
+#     transitieweb.nl
+#     privacynieuws.nl
+#     frontnieuws.com
+#     geenstijl.nl (100% complottheorie-vrij)
+#     jensen.nl
+#     indigorevolution.nl, wanttoknow.nl, martinvrijland.nl, ellaster.nl en finalwakeupcall.info (niet vaak geüpdatet)
+# deanderekrant.nl
+# ongehoordnederland.tv(?)
