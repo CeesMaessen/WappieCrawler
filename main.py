@@ -23,6 +23,9 @@ class WappieCrawler:
     def get_href_from_html(self, url, webpage_html):
         for link in webpage_html.xpath('//a/@href'):
             if link.startswith('/'):
+                # urljoin automatically slices {url}.
+                # e.g. https://www.indymedia.nl/node/53163 becomes https://www.indymedia.nl.
+                # Therefore urljoin doesnt produce https://www.indymedia.nl/node/53163/node/53168 for example.
                 new_page = urljoin(url, link)
                 print(f'Page found:{new_page}')
                 yield new_page
