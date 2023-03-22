@@ -61,4 +61,4 @@ if __name__ == '__main__':
     WappieCrawler(website_queue=['https://www.indymedia.nl/']).go()
 
 
-# Get hrefs from tree: tree.xpath('//a/@href")
+# TODO: Save scraped html files. Find best way to save html files for using NLP algorithms.
