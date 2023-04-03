@@ -1,13 +1,19 @@
-from lxml import html
-import requests
-from urllib.parse import urljoin
 import time
+from urllib.parse import urljoin
+
+import pandas as pd
+import requests
+from lxml import html
+
+from Scraper import scrape_it_mate
+
 
 class WappieCrawler:
 
 # Make lists to see which websites have been visited and which ones are in queue.
     def __init__(self, website_queue, wait_time=2, max_visits=100):
         self.visited_websites = []
+        self.urls_to_scrape = []
         self.website_queue = website_queue
         self.wait_time = wait_time
         self.max_visits = max_visits
@@ -34,9 +40,11 @@ class WappieCrawler:
 
 
     def add_new_url_to_queue(self, url):
-        if url not in self.visited_websites and url not in self.website_queue:
-            print(f'{url} added to queue')
-            self.website_queue.append(url)
+            if url not in self.visited_websites and url not in self.website_queue:
+                print(f'{url} added to queue')
+                self.website_queue.append(url)
+                self.urls_to_scrape.append(url) # Add the URL to the list of URLs to scrape.
+
 
 
     def crawl(self, url):
@@ -58,7 +66,18 @@ class WappieCrawler:
 
 
 if __name__ == '__main__':
-    WappieCrawler(website_queue=['https://www.indymedia.nl/'], wait_time=1, max_visits=4).go()
+    # create a crawler object containing all urls of domain indymedia.nl
+    indy_media = WappieCrawler(website_queue=['https://www.indymedia.nl/'], wait_time=1, max_visits=3)
+    indy_media.go()
+
+    results = []
+    # scrape all urls in the list of urls to scrape
+    for url in indy_media.urls_to_scrape:
+        results.append(scrape_it_mate(url))
+    
+    # save results to csv file
+    results_df = pd.DataFrame(results, columns=['text', 'url'])
+    results_df.to_csv('results.csv', index=False)
 
 
 
