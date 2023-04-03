@@ -62,10 +62,6 @@ if __name__ == '__main__':
 
 
 
-# TODO: Add a stopping condition ST the crawler stops after x urls
-# TODO: Write scraping function.
-# TODO: Find way to have the scraper filter on class tags ST article comments can be ignored (or scraped seperately)
-
 # Example websites for in queue:
 #     niburu.co
 #     ninefornews.nl
