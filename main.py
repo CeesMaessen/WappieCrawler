@@ -6,16 +6,18 @@ import time
 class WappieCrawler:
 
 # Make lists to see which websites have been visited and which ones are in queue.
-    def __init__(self, website_queue):
+    def __init__(self, website_queue, wait_time=2, max_visits=100):
         self.visited_websites = []
         self.website_queue = website_queue
+        self.wait_time = wait_time
+        self.max_visits = max_visits
 
 
 # Download a webpage and return it as html file
     def download_html(self, url):
         webpage = requests.get(url)
         webpage_html = html.fromstring(webpage.text)
-        time.sleep(10)
+        time.sleep(self.wait_time)
         return webpage_html
 
 
@@ -43,11 +45,9 @@ class WappieCrawler:
             self.add_new_url_to_queue(new_page)
 
 
-
     def go(self):
-        while self.website_queue:
+        while self.website_queue and len(self.visited_websites) < self.max_visits:
             url = self.website_queue.pop(0)
-            #print('website queue', self.website_queue)
             print('Current queue size: ', len(self.website_queue))
             print('Visited websites:', self.visited_websites)
             try:
@@ -58,10 +58,14 @@ class WappieCrawler:
 
 
 if __name__ == '__main__':
-    WappieCrawler(website_queue=['https://www.indymedia.nl/']).go()
+    WappieCrawler(website_queue=['https://www.indymedia.nl/'], wait_time=1, max_visits=4).go()
 
 
-# TODO: Save scraped html files. Find best way to save html files for using NLP algorithms.
+
+# TODO: Add a stopping condition ST the crawler stops after x urls
+# TODO: Write scraping function.
+# TODO: Find way to have the scraper filter on class tags ST article comments can be ignored (or scraped seperately)
+
 # Example websites for in queue:
 #     niburu.co
 #     ninefornews.nl
