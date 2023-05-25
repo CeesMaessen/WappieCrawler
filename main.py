@@ -96,20 +96,54 @@ if __name__ == '__main__':
     #niburu_crawler.go()
     #niburu_df = scrape_df_and_csv(niburu_crawler, csv_name='results_niburu.csv')
 
+
     # Gives you a random post every time. Not really usable
     # Found a workaround by using the Copy All Tab Urls extension in firefox and opening a bunch of them
     # does require some manual work, but it may be worth it for analysis
+    nine_for_news_urls = [
+        "https://www.ninefornews.nl/page/13/",
+        "https://www.ninefornews.nl/europarlementarier-geeft-in-3-minuten-3-redenen-waarom-wereldwijd-pandemieverdrag-gevaarlijk-is/",
+        "https://www.ninefornews.nl/world-economic-forum-kondigt-zomer-davos-aan-en-hier-vindt-de-bijeenkomst-plaats/",
+        "https://www.ninefornews.nl/russische-soldaten-doen-opmerkelijke-uitspraken-over-oorlog-in-oekraine/",
+        "https://www.ninefornews.nl/harde-uithaal-naar-groene-gek-timmermans-hele-gevaarlijke-man/",
+        "https://www.ninefornews.nl/zo-hebben-ze-de-pandemie-nog-2-jaar-gerekt-dit-is-een-groot-schandaal/",
+        "https://www.ninefornews.nl/brisante-onthullingen-de-hufterigheid-van-rutte-cum-suis-kent-geen-grenzen/",
+        "https://www.ninefornews.nl/kaag-kiest-er-bewust-voor-om-de-nederlandse-bevolking-armer-te-maken/",
+        "https://www.ninefornews.nl/verslagenheid-na-aannemen-dictatoriale-pandemiewet-moeilijke-moeilijke-tijden-komen-eraan/",
+        "https://www.ninefornews.nl/instagram-influencer-verheerlijkt-euthanasie-heb-je-er-zin-in/",
+        "https://www.ninefornews.nl/timmermans-aangepakt-trek-die-verschrikkelijke-nederland-op-slot-wet-in/",
+        "https://www.ninefornews.nl/thierry-baudet-waarschuwt-ze-laten-nadrukkelijk-de-mogelijkheid-voor-klimaatlockdowns-open/",
+        "https://www.ninefornews.nl/eerste-kamerlid-christenunie-gaat-zonder-enig-benul-over-omstreden-pandemiewet-stemmen/",
+        "https://www.ninefornews.nl/fel-verzet-tegen-pandemiewet-geef-onze-vrijheid-niet-weg/",
+        "https://www.ninefornews.nl/schrijver-hier-heeft-het-duivelsgebroed-zich-in-nederland-genesteld/",
+        "https://www.ninefornews.nl/amerikaanse-acteur-doet-schokkend-boekje-open-over-luguber-ritueel-dat-hij-zag/",
+        "https://www.ninefornews.nl/fvd-stelt-kamervragen-over-bilderbergconferentie-waarom-krijgt-de-kamer-niets-te-horen/",
+        "https://www.ninefornews.nl/de-boeren-moeten-weg-want-rutte-wil-iets-heel-speciaals-samen-met-het-world-economic-forum/",
+        "https://www.ninefornews.nl/gevaccineerden-zullen-over-2-jaar-dood-zijn-zegt-deze-arts/",
+        'https://www.ninefornews.nl/europarlementarier-dit-is-waarom-de-who-bestempeld-moet-worden-als-terreurorganisatie/',
+        'https://www.ninefornews.nl/arts-over-nederlanders-die-heulen-met-perverse-terreur-van-von-der-leyen-en-schwab-pak-ze-aan/',
+        'https://www.ninefornews.nl/rusland-dreigt-onze-f-16s-uit-de-lucht-te-schieten-boven-oekraine/',
+        'https://www.ninefornews.nl/oekraine-doet-schokkende-bekentenis-die-is-genegeerd-door-westerse-media/',
+        'https://www.ninefornews.nl/nieuwe-pensioenwet-gekraakt-wanneer-zoiets-in-een-derdewereldland-zou-gebeuren-zouden-de-rapen-gaar-zijn/',
+        'https://www.ninefornews.nl/europese-hoofd-van-bilderberg-victor-halberstadt-ontkent-bij-bilderberg-dat-hij-victor-halberstadt-is/',
+        'https://www.ninefornews.nl/coronacriticus-van-het-eerste-uur-rashid-buttar-vlak-voor-zijn-dood-ik-ben-doelbewust-vergiftigd/',
+        'https://www.ninefornews.nl/acteur-epstein-eiland-is-niet-het-enige-eiland-waar-ze-kinderen-pijn-hebben-gedaan/',
+        'https://www.ninefornews.nl/kamerlid-haalt-fel-uit-naar-d66-die-partij-is-een-dogmatische-sekte/',
+        'https://www.ninefornews.nl/advocaat-zegt-groenlinks-lidmaatschap-op-omdat-klaver-en-halsema-aangesloten-zijn-bij-world-economic-forum/',
+        'https://www.ninefornews.nl/great-reset-architect-yuval-harari-glipt-via-achterdeur-naar-binnen-bij-bilderberg/']
     nine_for_news_crawler = WappieCrawler(website_queue=[])
-    nine_for_news_crawler.urls_to_scrape = []
+    nine_for_news_crawler.urls_to_scrape = nine_for_news_urls
+    print(nine_for_news_crawler.urls_to_scrape)
+    nine_for_news_df = scrape_df_and_csv(nine_for_news_crawler, csv_name='results_nine_for_news.csv', date_time_class_search=['span', 'date meta-item tie-icon'])
 
     # Gedachtenvoer doesn't crawl for some reason
     #gedachtenvoer_crawler = WappieCrawler(website_queue=['http://gedachtenvoer.nl/'], wait_time=1, max_visits=10)
     #gedachtenvoer_crawler.go()
     #gedachtenvoer_df = scrape_df_and_csv(gedachtenvoer_crawler, csv_name='results_gedachtenvoer.csv')
 
-    privacy_nieuws_crawler = WappieCrawler(website_queue=['https://privacynieuws.nl/'], wait_time=2, max_visits=10)
-    privacy_nieuws_crawler.go()
-    privacy_nieuws_df = scrape_df_and_csv(privacy_nieuws_crawler, csv_name= 'results_privacynieuws.csv')
+    #privacy_nieuws_crawler = WappieCrawler(website_queue=['https://privacynieuws.nl/'], wait_time=2, max_visits=10)
+    #privacy_nieuws_crawler.go()
+    #privacy_nieuws_df = scrape_df_and_csv(privacy_nieuws_crawler, csv_name= 'results_privacynieuws.csv')
 
 # TODO: Add delay time to scraper and possibly more ways to find day time
 # Example websites for in queue:
@@ -125,6 +159,8 @@ if __name__ == '__main__':
 #     indigorevolution.nl, wanttoknow.nl, martinvrijland.nl, ellaster.nl en finalwakeupcall.info (niet vaak geüpdatet)
 # deanderekrant.nl
 # ongehoordnederland.tv(?)
+
+
 
 
 # https://www.ninefornews.nl/page/13/
@@ -157,6 +193,8 @@ if __name__ == '__main__':
 # https://www.ninefornews.nl/kamerlid-haalt-fel-uit-naar-d66-die-partij-is-een-dogmatische-sekte/
 # https://www.ninefornews.nl/advocaat-zegt-groenlinks-lidmaatschap-op-omdat-klaver-en-halsema-aangesloten-zijn-bij-world-economic-forum/
 # https://www.ninefornews.nl/great-reset-architect-yuval-harari-glipt-via-achterdeur-naar-binnen-bij-bilderberg/
+
+
 # https://www.ninefornews.nl/slachtoffers-prikschade-gaan-langs-bij-ministerie-van-vws-wil-je-meedoen-pak-je-kans/
 # https://www.ninefornews.nl/rutte-en-kaag-krijgen-bakken-kritiek-om-deelname-bilderbergconferentie-zij-zijn-bij-ons-in-dienst/
 # https://www.ninefornews.nl/rutte-maakt-zich-niet-populair-u-wilt-gewoon-escaleren/
