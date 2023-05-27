@@ -3,6 +3,16 @@ import requests
 from bs4 import BeautifulSoup
 import re
 
+def extract_urls_from_single_string(url_string: str) -> list:
+    '''
+    Turns one big string of urls seperated by '; ' into a list of urls.
+    the '; ' seperator is a result from concatenating lines in PyCharm with ctrl+shift+j
+
+    :param url_string: string of urls
+    :return: list of urls
+    '''
+    urls = list(url_string.split('; '))
+    return urls
 
 def scrape_it_mate(url: str, date_time_text_search: str = None, date_time_class_search: list = None, allowlist: list = None):
     '''
@@ -40,11 +50,13 @@ def scrape_it_mate(url: str, date_time_text_search: str = None, date_time_class_
 
     scraped_data = [string, date_time, url]
 
-    return scraped_data
+    htmls = [html['href'] for html in soup.find_all('a', href=True)]
+
+    return htmls
 
 
-test_result = scrape_it_mate("https://www.ninefornews.nl/world-economic-forum-kondigt-zomer-davos-aan-en-hier-vindt-de-bijeenkomst-plaats/", date_time_class_search=['span', 'date meta-item tie-icon'])
-test_result_2 = scrape_it_mate('https://gedachtenvoer.nl/2023/04/08/hoe-krijg-jij-je-leven-weer-op-de-rit/')
-# TODO: Write scraping function. -> Done
-# TODO: Save scraped text + url somewhere -> Done
-# TODO: Find way to have the scraper filter on class tags ST article comments can be ignored (or scraped seperately)
+test_result = scrape_it_mate("https://www.transitieweb.nl/", date_time_class_search=['span', 'published'])
+test_result_2 = scrape_it_mate("https://www.transitieweb.nl/", date_time_class_search=['span', 'date meta-item tie-icon'])
+
+
+
