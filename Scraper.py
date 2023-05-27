@@ -3,17 +3,6 @@ import requests
 from bs4 import BeautifulSoup
 import re
 
-def extract_urls_from_single_string(url_string: str) -> list:
-    '''
-    Turns one big string of urls seperated by '; ' into a list of urls.
-    the '; ' seperator is a result from concatenating lines in PyCharm with ctrl+shift+j
-
-    :param url_string: string of urls
-    :return: list of urls
-    '''
-    urls = list(url_string.split('; '))
-    return urls
-
 def scrape_it_mate(url: str, date_time_text_search: str = None, date_time_class_search: list = None, allowlist: list = None):
     '''
     Outputs a list containing [text of article, datetime of posting, url]
@@ -50,13 +39,13 @@ def scrape_it_mate(url: str, date_time_text_search: str = None, date_time_class_
 
     scraped_data = [string, date_time, url]
 
-    htmls = [html['href'] for html in soup.find_all('a', href=True)]
-
-    return htmls
+    return scraped_data
 
 
 test_result = scrape_it_mate("https://www.transitieweb.nl/", date_time_class_search=['span', 'published'])
-test_result_2 = scrape_it_mate("https://www.transitieweb.nl/", date_time_class_search=['span', 'date meta-item tie-icon'])
+test_result_2 = scrape_it_mate("https://www.ninefornews.nl/", date_time_class_search=['span', 'date meta-item tie-icon'])
+test_result_3 = scrape_it_mate("https://www.frontnieuws.com/de-economische-zelfmoord-van-eu-landen-uit-de-officiele-gegevens-blijkt-dat-duitsland-zichzelf-in-een-recessie-heeft-gesanctioneerd/")
+test_result_4 = scrape_it_mate('https://deanderekrant.nl/nieuws/klokkenluiders-niet-beschermd-maar-vervolgd-door-de-staat-2023-05-26', date_time_text_search='Datum: ')
 
 
 
