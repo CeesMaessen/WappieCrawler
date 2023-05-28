@@ -42,7 +42,7 @@ def scrape_it_mate(url: str, date_time_text_search: str = None, date_time_class_
     return scraped_data
 
 
-test_result = scrape_it_mate("https://www.transitieweb.nl/", date_time_class_search=['span', 'published'])
+test_result = scrape_it_mate("https://www.transitieweb.nl/", date_time_class_search=['p', 'post-byline'])
 test_result_2 = scrape_it_mate("https://www.ninefornews.nl/", date_time_class_search=['span', 'date meta-item tie-icon'])
 test_result_3 = scrape_it_mate("https://www.frontnieuws.com/de-economische-zelfmoord-van-eu-landen-uit-de-officiele-gegevens-blijkt-dat-duitsland-zichzelf-in-een-recessie-heeft-gesanctioneerd/")
 test_result_4 = scrape_it_mate('https://deanderekrant.nl/nieuws/klokkenluiders-niet-beschermd-maar-vervolgd-door-de-staat-2023-05-26', date_time_text_search='Datum: ')
