@@ -118,10 +118,6 @@ df_niburu = pd.read_csv('results_niburu.csv')
 df_niburu = clean_df(df_niburu, df_name='niburu')
 df_niburu.to_csv('niburu_clean.csv')
 
-df_privacynieuws = pd.read_csv('results_privacynieuws.csv')
-df_privacynieuws = clean_df(df_privacynieuws, df_name='privacynieuws')
-df_privacynieuws.to_csv('privacynieuws_clean.csv')
-
 df_frontnieuws = pd.read_csv('results_frontnieuws.csv')
 df_frontnieuws = clean_df(df_frontnieuws, df_name='frontnieuws')
 df_frontnieuws.to_csv('frontnieuws_clean.csv')

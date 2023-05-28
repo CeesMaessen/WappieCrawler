@@ -20,7 +20,16 @@ def scrape_it_mate(url: str, date_time_text_search: str = None, date_time_class_
         allowlist = ['p', 'span']
 
     # Get webpage and make soup
-    webpage = requests.get(url)
+    try:
+        # Wait 10 seconds if url cant be requested
+        webpage = requests.get(url, timeout=10)
+
+    # Show errors otherwise
+    except requests.exceptions.Timeout as e:
+        print(e)
+    except requests.exceptions.RequestException as e:
+        print(e)
+
     soup = BeautifulSoup(webpage.content, 'html.parser')
 
     # Get the text of the soup
@@ -40,7 +49,6 @@ def scrape_it_mate(url: str, date_time_text_search: str = None, date_time_class_
     scraped_data = [string, date_time, url]
 
     return scraped_data
-
 
 test_result = scrape_it_mate("https://www.transitieweb.nl/", date_time_class_search=['p', 'post-byline'])
 test_result_2 = scrape_it_mate("https://www.ninefornews.nl/", date_time_class_search=['span', 'date meta-item tie-icon'])

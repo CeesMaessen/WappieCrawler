@@ -3,7 +3,6 @@ from urllib.parse import urljoin
 from bs4 import BeautifulSoup
 import pandas as pd
 import requests
-
 from Scraper import scrape_it_mate
 
 
@@ -66,7 +65,7 @@ class WappieCrawler:
         print(f'Found these urls to scrape {self.urls_to_scrape}')
 
 
-def scrape_df_and_csv(crawler_obj: WappieCrawler, csv_name: str, root_domain: str, allowlist: list = None,
+def scrape_df_and_csv(crawler_obj: WappieCrawler, csv_name: str, allowlist: list = None,
                       date_time_text_search: str = None, date_time_class_search: list = None):
     '''
     Scrapes urls given a WappieCrawler object by looking at its urls_to_scrape list. Returns a df and saves a csv of this df.
@@ -85,14 +84,14 @@ def scrape_df_and_csv(crawler_obj: WappieCrawler, csv_name: str, root_domain: st
     # scrape all urls in the list of urls to scrape
     for url in crawler_obj.urls_to_scrape:
         # Have to make sure we are only scraping urls from the root domain
-        if url.startswith(root_domain):
-            try:
-                print(f"Now scraping: {url}")
-                # Searching for the date time in the text with a specific string
-                results.append(scrape_it_mate(url, allowlist=allowlist, date_time_text_search=date_time_text_search,
+
+        try:
+            print(f"Now scraping: {url}")
+            # Searching for the date time in the text with a specific string
+            results.append(scrape_it_mate(url, allowlist=allowlist, date_time_text_search=date_time_text_search,
                                               date_time_class_search=date_time_class_search))
-            except:
-                print(f'Failed to scrape {url}')
+        except:
+            print(f'Failed to scrape {url}')
 
     # save results to csv file
     results_df = pd.DataFrame(results, columns=['text', 'date', 'url'])
@@ -102,41 +101,41 @@ def scrape_df_and_csv(crawler_obj: WappieCrawler, csv_name: str, root_domain: st
 
 
 if __name__ == '__main__':
-    # create a crawler object containing all urls of domain indymedia.nl
-    indy_media_crawler = WappieCrawler(website_queue=['https://www.indymedia.nl/'], root_domain='https://www.indymedia.nl/', wait_time=1, max_visits=20)
-    indy_media_crawler.go()
-    # Scrape date based on text search
-    indy_media_df = scrape_df_and_csv(indy_media_crawler, root_domain='https://www.indymedia.nl', csv_name='results_indymedia.csv', date_time_text_search='gepost door:')
+    # # create a crawler object containing all urls of domain indymedia.nl
+    # indy_media_crawler = WappieCrawler(website_queue=['https://www.indymedia.nl/'], root_domain='https://www.indymedia.nl/', wait_time=1, max_visits=40)
+    # indy_media_crawler.go()
+    # # Scrape date based on text search
+    # indy_media_df = scrape_df_and_csv(indy_media_crawler, csv_name='results_indymedia.csv', date_time_text_search='gepost door:')
 
-    niburu_crawler = WappieCrawler(website_queue=['https://niburu.co/'], root_domain='https://niburu.co/', wait_time=1, max_visits=20)
+    niburu_crawler = WappieCrawler(website_queue=['https://niburu.co/'], root_domain='https://niburu.co/', wait_time=1, max_visits=40)
     niburu_crawler.go()
     # Scrape date based on time element
-    niburu_df = scrape_df_and_csv(niburu_crawler, root_domain='https://niburu.co', csv_name='results_niburu.csv')
+    niburu_df = scrape_df_and_csv(niburu_crawler, csv_name='results_niburu.csv')
 
-    nine_for_news_crawler = WappieCrawler(website_queue=['https://www.ninefornews.nl/'], root_domain='https://www.ninefornews.nl', wait_time=1, max_visits=20)
+    nine_for_news_crawler = WappieCrawler(website_queue=['https://www.ninefornews.nl/'], root_domain='https://www.ninefornews.nl', wait_time=1, max_visits=40)
     nine_for_news_crawler.go()
     # Scrape date based on class search
-    nine_for_news_df = scrape_df_and_csv(nine_for_news_crawler, root_domain='https://www.ninefornews.nl', csv_name='results_nine_for_news.csv', date_time_class_search=['span', 'date meta-item tie-icon'])
+    nine_for_news_df = scrape_df_and_csv(nine_for_news_crawler, csv_name='results_nine_for_news.csv', date_time_class_search=['span', 'date meta-item tie-icon'])
 
-    transitieweb_crawler = WappieCrawler(website_queue=['https://www.transitieweb.nl/'], root_domain='https://www.transitieweb.nl', wait_time=1, max_visits=20)
-    transitieweb_crawler.go()
-    # Scrape based on class search
-    transitieweb_df = scrape_df_and_csv(transitieweb_crawler, root_domain='https://www.transitieweb.nl', csv_name='results_transitieweb.csv', date_time_class_search=['span', 'published'])
+    # transitieweb_crawler = WappieCrawler(website_queue=['https://www.transitieweb.nl/'], root_domain='https://www.transitieweb.nl', wait_time=1, max_visits=20)
+    # transitieweb_crawler.go()
+    # # Scrape based on class search
+    # transitieweb_df = scrape_df_and_csv(transitieweb_crawler, root_domain='https://www.transitieweb.nl', csv_name='results_transitieweb.csv', date_time_class_search=['span', 'published'])
 
-    frontnieuws_crawler = WappieCrawler(website_queue=['https://www.frontnieuws.com/'], root_domain='https://www.frontnieuws.com', wait_time=1, max_visits=20)
+    frontnieuws_crawler = WappieCrawler(website_queue=['https://www.frontnieuws.com/'], root_domain='https://www.frontnieuws.com', wait_time=1, max_visits=40)
     frontnieuws_crawler.go()
     # Scrape date based on time element
-    frontnieuws_df = scrape_df_and_csv(frontnieuws_crawler, root_domain='https://www.frontnieuws.com', csv_name='results_frontnieuws.csv')
+    frontnieuws_df = scrape_df_and_csv(frontnieuws_crawler, csv_name='results_frontnieuws.csv')
 
-    de_andere_krant_crawler = WappieCrawler(website_queue=['https://deanderekrant.nl'], root_domain='https://deanderekrant.nl', wait_time=1, max_visits=20)
-    de_andere_krant_crawler.go()
-    # Removed some urls manually since they caused issues
-    de_andere_krant_crawler.urls_to_scrape.remove('https://deanderekrant.nl/file/DAK:/Podcast/AK 049 Pandemiewet is een juridische staatsgreep.mp3')
-    de_andere_krant_crawler.urls_to_scrape.remove('https://deanderekrant.nl/nieuws/Samen Leven')
-    de_andere_krant_crawler.urls_to_scrape.remove('https://deanderekrant.nl/nieuws/Mens en Macht')
-    print(len(de_andere_krant_crawler.urls_to_scrape))
-    # Scrape date based on text search
-    de_andere_krant_df = scrape_df_and_csv(de_andere_krant_crawler, root_domain='https://deanderekrant.nl', csv_name='results_de_andere_krant.csv', date_time_text_search='Datum: ')
+    # de_andere_krant_crawler = WappieCrawler(website_queue=['https://deanderekrant.nl'], root_domain='https://deanderekrant.nl', wait_time=1, max_visits=20)
+    # de_andere_krant_crawler.go()
+    # # Removed some urls manually since they caused issues
+    # de_andere_krant_crawler.urls_to_scrape.remove('https://deanderekrant.nl/file/DAK:/Podcast/AK 049 Pandemiewet is een juridische staatsgreep.mp3')
+    # de_andere_krant_crawler.urls_to_scrape.remove('https://deanderekrant.nl/nieuws/Samen Leven')
+    # de_andere_krant_crawler.urls_to_scrape.remove('https://deanderekrant.nl/nieuws/Mens en Macht')
+    # print(len(de_andere_krant_crawler.urls_to_scrape))
+    # # Scrape date based on text search
+    # de_andere_krant_df = scrape_df_and_csv(de_andere_krant_crawler, root_domain='https://deanderekrant.nl', csv_name='results_de_andere_krant.csv', date_time_text_search='Datum: ')
 
 
 
