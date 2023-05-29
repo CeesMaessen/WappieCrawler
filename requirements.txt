@@ -1,0 +1,8 @@
+pandas
+requests
+beautifulsoup4
+lxml
+python-dateutil
+tiktoken
+openai
+dotenv

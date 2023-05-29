@@ -101,11 +101,11 @@ def scrape_df_and_csv(crawler_obj: WappieCrawler, csv_name: str, allowlist: list
 
 
 if __name__ == '__main__':
-    # # create a crawler object containing all urls of domain indymedia.nl
-    # indy_media_crawler = WappieCrawler(website_queue=['https://www.indymedia.nl/'], root_domain='https://www.indymedia.nl/', wait_time=1, max_visits=40)
-    # indy_media_crawler.go()
-    # # Scrape date based on text search
-    # indy_media_df = scrape_df_and_csv(indy_media_crawler, csv_name='results_indymedia.csv', date_time_text_search='gepost door:')
+    # create a crawler object containing all urls of domain indymedia.nl
+    indy_media_crawler = WappieCrawler(website_queue=['https://www.indymedia.nl/'], root_domain='https://www.indymedia.nl/', wait_time=1, max_visits=40)
+    indy_media_crawler.go()
+    # Scrape date based on text search
+    indy_media_df = scrape_df_and_csv(indy_media_crawler, csv_name='results_indymedia.csv', date_time_text_search='gepost door:')
 
     niburu_crawler = WappieCrawler(website_queue=['https://niburu.co/'], root_domain='https://niburu.co/', wait_time=1, max_visits=40)
     niburu_crawler.go()
@@ -128,14 +128,7 @@ if __name__ == '__main__':
     frontnieuws_df = scrape_df_and_csv(frontnieuws_crawler, csv_name='results_frontnieuws.csv')
 
     # de_andere_krant_crawler = WappieCrawler(website_queue=['https://deanderekrant.nl'], root_domain='https://deanderekrant.nl', wait_time=1, max_visits=20)
-    # de_andere_krant_crawler.go()
-    # # Removed some urls manually since they caused issues
-    # de_andere_krant_crawler.urls_to_scrape.remove('https://deanderekrant.nl/file/DAK:/Podcast/AK 049 Pandemiewet is een juridische staatsgreep.mp3')
-    # de_andere_krant_crawler.urls_to_scrape.remove('https://deanderekrant.nl/nieuws/Samen Leven')
-    # de_andere_krant_crawler.urls_to_scrape.remove('https://deanderekrant.nl/nieuws/Mens en Macht')
-    # print(len(de_andere_krant_crawler.urls_to_scrape))
-    # # Scrape date based on text search
-    # de_andere_krant_df = scrape_df_and_csv(de_andere_krant_crawler, root_domain='https://deanderekrant.nl', csv_name='results_de_andere_krant.csv', date_time_text_search='Datum: ')
+
 
 
 
@@ -152,3 +145,4 @@ if __name__ == '__main__':
 #     indigorevolution.nl, wanttoknow.nl, martinvrijland.nl, ellaster.nl en finalwakeupcall.info (niet vaak geüpdatet)
 # deanderekrant.nl
 # ongehoordnederland.tv(?)
+
